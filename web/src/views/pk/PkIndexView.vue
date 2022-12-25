@@ -1,15 +1,12 @@
 <template>
-    <ContentField>
-        PK
-    </ContentField>
+    <PlayGroundVue />
 </template>
 
 <script>
-    import ContentField from '../../components/ContentField.vue'
-
+import PlayGroundVue from '@/components/PlayGround.vue';
 export default {
     components: {
-        ContentField
+        PlayGroundVue
     }
 }
 </script>

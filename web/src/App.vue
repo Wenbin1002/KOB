@@ -6,7 +6,7 @@
 <script>
   import NavBar from "./components/NavBar.vue";
   import "bootstrap/dist/css/bootstrap.min.css"
-  import "bootstrap/dist/js/bootstrap"
+  import "bootstrap/dist/js/bootstrap.js"
 
   export default {
     components: {
