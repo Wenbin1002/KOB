@@ -1,4 +1,4 @@
-package com.kob.backend.service.impl.util;
+package com.kob.backend.service.impl.utils;
 
 import com.kob.backend.pojo.User;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
