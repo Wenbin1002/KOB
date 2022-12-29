@@ -1,5 +1,5 @@
 <template>
-  <ContentField>
+  <ContentField v-if="!$store.state.user.pulling_info">
     <div class="row justify-content-md-center">
         <div class="col-3">
             <form @submit.prevent="login">
@@ -11,7 +11,7 @@
                     <label for="password" class="form-label">Password</label>
                     <input v-model="password" type="password" class="form-control" id="password" placeholder="password">
                 </div>
-                <div class="error_massage">{{ error_massage }}</div>
+                <div class="error_message">{{ error_message }}</div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -33,10 +33,27 @@ export default {
         const store = useStore();
         let username = ref('');
         let password = ref('');
-        let error_massage = ref('');
+        let error_message = ref('');
+        let show_content = false;
+
+        const jwt_token = localStorage.getItem("jwt_token");
+        if(jwt_token) {
+            store.commit("updateToken", jwt_token);
+            store.dispatch("getInfo", {
+                success() {
+                    router.push({ name: "home" })
+                    store.commit("updatePullingInfo", false);
+                },
+                error() {
+                    store.commit("updatePullingInfo", false);
+                }
+            })
+        } else {
+            store.commit("updatePullingInfo", false);
+        }
 
         const login = () => {
-            error_massage.value = "";
+            error_message.value = "";
 
             store.dispatch("login", {
                 username: username.value,
@@ -51,7 +68,7 @@ export default {
                     
                 },
                 error() {
-                    error_massage.value = "failed to login";
+                    error_message.value = "failed to login";
                 }
             })
         }
@@ -59,8 +76,9 @@ export default {
         return {
             username,
             password,
-            error_massage,
+            error_message,
             login,
+            show_content,
         }
     }
 }
@@ -71,7 +89,7 @@ button {
     width: 100%;
 }
 
-div.error_massage {
+div.error_message {
     color:red;
 }
 </style>
