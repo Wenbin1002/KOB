@@ -34,12 +34,12 @@ public class AddServiceImpl implements AddService {
         Map<String, String> map = new HashMap<>();
 
         if(title == null || title.length() == 0) {
-            map.put("error_message", "please type title");
+            map.put("error_message", "please type name");
             return map;
         }
 
         if(title.length() > 100) {
-            map.put("error_message", "title should less than 100");
+            map.put("error_message", "name should less than 100");
             return map;
         }
 
@@ -53,12 +53,12 @@ public class AddServiceImpl implements AddService {
         }
 
         if(content == null || content.length() == 0) {
-            map.put("error_message", "please type content");
+            map.put("error_message", "please type code");
             return map;
         }
 
         if(content.length() > 10000) {
-            map.put("error_message", "content should less than 300");
+            map.put("error_message", "code should less than 300");
             return map;
         }
 
