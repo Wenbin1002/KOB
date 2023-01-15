@@ -3,11 +3,12 @@ import { Wall } from "./Wall";
 import { Snake } from './Snake';
 
 export class GameMap extends AcGameObject {
-    constructor(ctx, parent) {
+    constructor(ctx, parent, store) {
         super();
 
         this.ctx = ctx;
         this.parent = parent;
+        this.store = store;
         this.length = 0;
 
         this.rows = 13;
@@ -22,55 +23,10 @@ export class GameMap extends AcGameObject {
         ]
     }
 
-    check_connectivity(g, a, b, x, y) {
-        if (a === x && b === y) return true;
-        g[a][b] = true;
-
-        const dx = [1, -1, 0, 0], dy = [0, 0, 1, -1];
-
-        for (let i = 0; i < 4; i++) {
-            let xx = a + dx[i], yy = b + dy[i];
-
-            if (!g[xx][yy] && this.check_connectivity(g, xx, yy, x, y)) return true;
-        }
-
-        return false;
-    }
+    
 
     create_Walls() {
-        const g = [];
-
-        for (let r = 0; r < this.rows; r++) {
-            g[r] = [];
-            for (let c = 0; c < this.cols; c++) {
-                g[r][c] = false;
-            }
-        }
-
-        for (let r = 0; r < this.rows; r++) {
-            for (let c = 0; c < this.cols; c++) {
-                if (r === 0 || c === 0 || r === this.rows - 1 || c === this.cols - 1) {
-                    g[r][c] = true;
-                }
-            }
-        }
-
-        for (let i = 0; i < this.max_walls_count / 2; i++) {
-            for (let j = 0; j < 1000; j++) {
-                let r = parseInt(Math.random() * this.rows);
-                let c = parseInt(Math.random() * this.cols);
-
-                if (g[r][c]) continue;
-
-                g[r][c] = true;
-                g[this.rows-1-r][this.cols-1-c] = true;
-                break;
-            }
-        }
-
-        const copy_g = JSON.parse(JSON.stringify(g));
-        if (!this.check_connectivity(copy_g, this.rows - 2, 1, 1, this.cols - 2))
-            return false;
+        const g = this.store.state.pk.gamemap;
 
         for (let r = 0; r < this.rows; r++) {
             for (let c = 0; c < this.cols; c++) {
@@ -101,9 +57,7 @@ export class GameMap extends AcGameObject {
 
 
     start() {
-        for (let i = 0; i < 1000; i++) {
-            if (this.create_Walls()) break;
-        }
+        this.create_Walls();
 
         this.add_listening_events();
     }
