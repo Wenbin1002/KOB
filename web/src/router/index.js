@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/home/HomeView'
 import PkIndexView from '../views/pk/PkIndexView'
 import RankListIndexView from '../views/ranklist/RankListIndexView'
 import RecordIndexView from '../views/record/RecordIndexView'
@@ -14,10 +13,11 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    redirect: "/pk/",
     meta: {
-      requestAuth: true,
+        requestAuth: true,
     }
+
   },
   {
     path: "/pk/",
