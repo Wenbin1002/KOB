@@ -57,7 +57,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Create time</th>
-                                    <th>Rating</th>
                                     <th>Option</th>
                                 </tr>
                             </thead>
@@ -65,7 +64,6 @@
                                 <tr v-for="bot in bots" :key="bot.id">
                                     <td>{{ bot.title }}</td>
                                     <td>{{ bot.createTime }}</td>
-                                    <td>{{ bot.rating }}</td>
                                     <td>
                                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" :data-bs-target="'#update-bot-modal-' + bot.id" style="width: 70px; font-size: 80%; margin-right: 10px;">Modify</button>
                                         <button type="button" class="btn btn-danger" style="width: 70px; font-size: 80%;" @click="remove_bot(bot)">Delete</button>
