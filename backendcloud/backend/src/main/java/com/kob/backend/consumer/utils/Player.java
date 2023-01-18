@@ -12,6 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Player {
     private Integer id;
+    private Integer botId;
+    private String botCode;
     private Integer sx;
     private Integer sy;
     private List<Integer> steps;
@@ -29,8 +31,10 @@ public class Player {
         int step = 0;
         res.add(new Cell(x,y));
         for(int d: steps) {
+//            System.out.println("head: " + x + " " + y);
             x += dx[d];
             y += dy[d];
+//            System.out.println("add cell: " + this.id + " " + x + " " + y);
             res.add(new Cell(x, y));
             if(!check_tail_increasing(++ step)) {
                 res.remove(0);
