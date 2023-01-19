@@ -22,6 +22,7 @@ export default {
         const socketUrl = `ws://127.0.0.1:3030/websocket/${store.state.user.token}/`;
 
         store.commit("updateLoser", "none");
+        store.commit("updateIsRecord", false);
 
         let socket = null;
         onMounted(() => {
@@ -42,7 +43,7 @@ export default {
                     setTimeout(() => {
                     store.commit("updateStatus","playing");
                     }, 200);
-                    store.commit("updateGamemap", data.game);
+                    store.commit("updateGame", data.game);
                     store.commit("updateOpponent" , {
                         username: "competitor",
                         photo: "https://cdn.acwing.com/media/article/image/2022/08/09/1_1db2488f17-anonymous.png",
